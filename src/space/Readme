@@ -1,0 +1,120 @@
+Peilen voorkennis:
+Vooraf kan er aan de klas gevraagd worden:
+- Wie heeft er al eens met inheritance gewerkt?
+- Wie heeft er al eens (per ongeluk) mee gewerkt?
+- Heeft iemand al eens gehoord van bijvoorbeeld MVC of MVVM? Op stage bijvoorbeeld? (Er zijn naast Inheritance,
+meerdere manier om structuur aan te brengen)
+
+Belangrijk is het om te zorgen dat studenten de meerwaarde gaan zien van het gebruiken van Inheritance. Het zorgt,
+net als bij de start van OOP, vooral in het leerproces een extra belasting op zowel het (voorbereidend) werk dat
+gedaan moet worden, als op het abstracte denkvermogen.
+Voordelen:
+- Minder code schrijven.
+- Hergebruik van werkende code.
+- Code is weer beter gestructureerd.
+- Code is nog altijd gemakkelijk te debuggen.
+- Code is nog gemakkelijker uit te breiden.
+
+// Opdracht om aan te tonen dat we ook gewend zijn om in objecten te denken kan de studenten gevraagd worden om eens
+// wat objecten te beschrijven in onderdelen en (indien mogelijk) gedrag. Voorbeelden zijn objecten in een klaslokaal,
+// maar ook het klaslokaal zelf. Kan een lokaal gezien worden als een ruimte? Zo ja, is een  kantoor in hetzelfde
+// schoolgebouw dan niet ook een afgeleide daarvan? Of een praktijklokaal?
+
+Voor het ontwerpen van classes waarbij inheritance een rol speelt is het belangrijk om onderaan in de hierarchie te
+beginnen. Ontwerp eerst alle objecten alsof alle andere objecten niet bestaan. Bepaal welke eigenschappen (properties)
+en gedragingen (methods) nodig zijn om het object te laten functioneren. Schrijf dit dan ook op! Een handige tool
+hiervoor is binnen UML (Unified Modeling Language) het klassendiagram te gebruiken.
+
+// Opdracht voor de student om hier op te zoeken wat UML doet voor een ontwikkelaar en wat een klassendiagram is.
+
+UML kan hierbij vooral gebruikt worden om gedachten vorm te geven op papier, hierbij hoeft niet per se aan alle regels
+gehouden te worden. Wel mogelijk natuurlijk.
+
+Voor deze les gaan we 2 specifieke objecten ontwerpen, namelijk een Fighter en een Cargoship.
+Voor het opschrijven is bijvoorbeeld het gebruiken van Excel (slepen met cellen) erg handig. Natuurlijk kan een
+Whiteboard ook.
+
+Mocht je hier een doe-opdracht van willen maken is het mogelijk om de eigenschappen op Post-Its (2 kleuren, 1 voor
+Methods, 1 voor Properties) te laten zetten door de studenten en ze deze vervolgens op de goede plek te plakken op een
+blad met daarop de classes al getekend.
+
+Vraag 1:
+Wat moet een Fighter kunnen?
+- Move
+- Hit
+- Shoot
+- IsAlive
+
+Vraag 2:
+Welke eigenschappen horen daar bij?
+- Fuel
+- HP
+- Ammo
+- isAlive
+
+Vraag 3:
+Hoe zit dat met een Cargoship?
+- Move
+- Hit
+- LoadCargo
+- UnloadCargo
+- IsAlive
+
+- Fuel
+- HP
+- Cargospace
+- isAlive
+
+Als je dit op het bord hebt gezet, dan zou het er zo uit kunnen zien. Onderaan het bord.
+
+Fighter         Cargoship
+- Move          Move
+- Hit           Hit
+- Shoot         LoadCargo
+- IsAlive       UnloadCargo
+                IsAlive
+
+- Fuel          Fuel
+- HP            HP
+- Ammo          Cargospace
+- isAlive       isAlive
+
+Als je bovenaan het bord zet Spaceship ziet het er alsvolgt uit:
+        Spaceship
+
+
+
+
+Fighter         Cargoship
+- Move          Move
+- Hit           Hit
+- Shoot         LoadCargo
+- IsAlive       UnloadCargo
+                IsAlive
+
+- Fuel          Fuel
+- HP            HP
+- Ammo          Cargospace
+- isAlive       isAlive
+
+Nu kan de klas aangeven wat er dubbel is en dan kan dit verplaatst worden naar de class erboven.
+
+het eindresultaat:
+        Spaceship
+        Move
+        Hit
+        IsAlive
+
+        Fuel
+        HP
+        isAlive
+
+Fighter         Cargoship
+Shoot           LoadCargo
+                UnloadCargo
+
+Ammo            Cargospace
+
+Vanaf hier kan er aan de code begonnen worden. We beginnen zometeen, met het maken van de class files, daarna starten
+we dan ook met het vullen van de class Spaceship, bovenaan in de hierarchie. Gelukkig kunnen we door de iteratieve
+manier van werken, de class simpel verbouwen door met code te schuiven.
