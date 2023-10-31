@@ -2,6 +2,8 @@
 use space\Spaceshipp;
 
 include_once "space\Spaceship.php";
+include_once "space\Fighter.php";
+include_once "space\Cargoship.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +47,7 @@ include_once "space\Spaceship.php";
             $ammo = random_int($minAmmo, $maxAmmo);
             $fuel = random_int($minFuel, $maxAmmo);
             $hp = random_int($minHP, $maxHP);
-            $fleet[$i] = new space\Spaceshipp($ammo, $fuel, $hp);
+            $fleet[$i] = new space\Fighter($ammo, $fuel, $hp);
         }
 
         for ($i = 0; $i < $numberOfShips; $i++) {
@@ -60,29 +62,56 @@ include_once "space\Spaceship.php";
         echo "<br>";
 
         // Voor het 'transport' van data wordt er een nieuw schip aangemaakt, een vijand, om op te schieten.
-        $enemyShip = new space(100, 150, 100);
+        $enemyShip = new Spaceshipp(100, 150, 100);
+
+        $enemyFleet = array(Spaceshipp::class);
+        // Ter voorkoming van Magic Numbers
+        $numberOfShips = 10;
+        $minAmmo = 10;
+        $maxAmmo = 100;
+        $minFuel = 10;
+        $maxFuel = 100;
+        $minHP = 10;
+        $maxHP = 100;
+
+        // Na de verandering in de class, is er in het aanmaken van de vloot niets verandert.
+        for ($x = 0; $x < $numberOfShips; $x++) {
+            $ammo = random_int($minAmmo, $maxAmmo);
+            $fuel = random_int($minFuel, $maxAmmo);
+            $hp = random_int($minHP, $maxHP);
+            $fleet[$x] = new space\Fighter($ammo, $fuel, $hp);
+        }
+
+        for ($x = 0; $x < $numberOfShips; $x++) {
+            // Vorige regel:
+            // echo "Ship " . $i + 1 . " has " . $fleet[$i]->ammo . " ammo<br>";
+
+            // Vraag aan student hier kan zijn, zorg er voor dat de code zo wordt geschreven dat het weer zou moeten
+            // werken. Maak dit ook voor de andere properties.
+            echo "Enemy Ship " . $x + 1 . " has " . $fleet[$x]->GetAmmo() . " ammo<br>";
+        }
+
+        echo "<br>";
 
         for ($i = 0; $i < $numberOfShips; $i++) {
             // Ook hier moet de code worden verbeterd zodat het weer werkt.
-            echo "Ship " . $i + 1 . " shoots at the enemy! <br>";
-            $dmg = $fleet[$i]->Shoot();
-            echo "Ship " . $i + 1 . " does " . $dmg . " damage.<br>";
-            $enemyShip->hit($dmg);
-            echo "The enemy has " . $enemyShip->GetHitPoints() . " HP left.<br>";
+            echo "Enemy Ship " . $i + 1 . " shoots at our ships! <br>";
+            $dmg = $enemyFleet[$x]->Shoot();
+            echo "The Enemy Ship " . $i + 1 . " does " . $dmg . " damage.<br>";
+            $fleet[$i]->hit($dmg);
+            echo "Our ship has " . $fleet[$i]->GetHitPoints() . " HP left.<br>";
             echo "<br>";
         }
-
-        // Voorbeeld uitwerking
         do {
             for ($i = 0; $i < $numberOfShips; $i++) {
-                echo "Ship " . $i + 1 . " manouvres to shoot at the enemy!<br>";
-                $fleet[$i]->Move();
-                echo "Ship " . $i + 1 . " reports " . $fleet[$i]->getFuel() . " fuel left.<br>";
+                echo "The enemy ship " . $i + 1 . " manouvres to shoot at our ship!<br>";
+                $fleet[$x]->Move();
+                echo "The enemy ship " . $i + 1 . " reports " . $fleet[$x]->getFuel() . " fuel left.<br>";
 
-                echo "Ship " . $i + 1 . " shoots at the enemy! <br>";
-                $dmg = $fleet[$i]->Shoot();
+                echo "The enemy ship " . $i + 1 . " shoots at our ship! <br>";
+                $dmg = $fleet[$x]->Shoot();
                 echo "Ship " . $i + 1 . " does " . $dmg . " damage.<br>";
-                $enemyShip->hit($dmg);
+                $fleet[$x]->hit($dmg);
                 echo "The enemy has {$enemyShip->getHitPoints()} HP left.<br>";
                 echo "<br>";
                 if (!$enemyShip->isAlive()) {
@@ -90,7 +119,7 @@ include_once "space\Spaceship.php";
                     break;
                 }
             }
-        } while ($enemyShip->isAlive());
+        } while ($enemyFleet[$x]->isAlive());
 
         echo "The end of the code has been reached.<br>";
         ?>
