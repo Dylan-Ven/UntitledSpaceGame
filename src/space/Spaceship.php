@@ -72,7 +72,7 @@ class Spaceshipp
 
         $this->hitPoints = $hitPoints;
     }
-
+    
     public function getFuel(): int
     {
         return $this->fuel;
