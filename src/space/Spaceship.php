@@ -3,7 +3,7 @@
 namespace space;
 
 // Vanaf hier kan er verteld worden dat dit niet zomaar meer een class is maar een baseclass of parentclass.
-class Spaceship
+class Spaceshipp
 {
     // Door te kijken naar het ontwerp in het Readme bestand, kunnen we zien dat alleen onderstaande properties
     // hier nog nodig zijn.

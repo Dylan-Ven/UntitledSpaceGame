@@ -1,8 +1,7 @@
 <?php
+use space\Spaceshipp;
 
 include_once "space\Spaceship.php";
-include_once "space\Fighter.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +30,7 @@ include_once "space\Fighter.php";
         echo "The ship has " . $ship->GetAmmo() . " ammo.<br><br>";
 
 
-        $fleet = array(Spaceship::class);
+        $fleet = array(Spaceshipp::class);
         // Ter voorkoming van Magic Numbers
         $numberOfShips = 10;
         $minAmmo = 10;
@@ -46,7 +45,7 @@ include_once "space\Fighter.php";
             $ammo = random_int($minAmmo, $maxAmmo);
             $fuel = random_int($minFuel, $maxAmmo);
             $hp = random_int($minHP, $maxHP);
-            $fleet[$i] = new space\Spaceship($ammo, $fuel, $hp);
+            $fleet[$i] = new space\Spaceshipp($ammo, $fuel, $hp);
         }
 
         for ($i = 0; $i < $numberOfShips; $i++) {
@@ -61,7 +60,7 @@ include_once "space\Fighter.php";
         echo "<br>";
 
         // Voor het 'transport' van data wordt er een nieuw schip aangemaakt, een vijand, om op te schieten.
-        $enemyShip = new space\(100, 150, 100);
+        $enemyShip = new space(100, 150, 100);
 
         for ($i = 0; $i < $numberOfShips; $i++) {
             // Ook hier moet de code worden verbeterd zodat het weer werkt.
