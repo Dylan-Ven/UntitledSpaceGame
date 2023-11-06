@@ -61,65 +61,6 @@ include_once "space\Cargoship.php";
 
         echo "<br>";
 
-        // Voor het 'transport' van data wordt er een nieuw schip aangemaakt, een vijand, om op te schieten.
-
-        $enemyFleet = array(Spaceshipp::class);
-        // Ter voorkoming van Magic Numbers
-        $numberOfShips = 10;
-        $minAmmo = 10;
-        $maxAmmo = 100;
-        $minFuel = 10;
-        $maxFuel = 100;
-        $minHP = 10;
-        $maxHP = 100;
-
-        // Na de verandering in de class, is er in het aanmaken van de vloot niets verandert.
-        for ($x = 0; $x < $numberOfShips; $x++) {
-            $ammo = random_int($minAmmo, $maxAmmo);
-            $fuel = random_int($minFuel, $maxAmmo);
-            $hp = random_int($minHP, $maxHP);
-            $enemyFleet[$x] = new space\Fighter($ammo, $fuel, $hp);
-        }
-
-        for ($x = 0; $x < $numberOfShips; $x++) {
-            // Vorige regel:
-            // echo "Ship " . $i + 1 . " has " . $fleet[$i]->ammo . " ammo<br>";
-
-            // Vraag aan student hier kan zijn, zorg er voor dat de code zo wordt geschreven dat het weer zou moeten
-            // werken. Maak dit ook voor de andere properties.
-            echo "Enemy ship " . $x + 1 . " has " . $enemyFleet[$x]->GetAmmo() . " ammo<br>";
-        }
-
-        echo "<br>";
-
-        for ($x = 0; $x < $numberOfShips; $x++) {
-            // Ook hier moet de code worden verbeterd zodat het weer werkt.
-            echo "Enemy Ship " . $x + 1 . " shoots at our ships! <br>";
-            $dmg = $enemyFleet[$x]->Shoot();
-            echo "The Enemy Ship " . $x + 1 . " does " . $dmg . " damage.<br>";
-            $fleet[$i]->hit($fleet[$hp]);
-            echo "Our ship has " . $fleet[$i]->GetHitPoints() . " HP left.<br>";
-            echo "<br>";
-        }
-        do {
-            for ($i = 0; $i < $numberOfShips; $i++) {
-                echo "The enemy ship " . $x + 1 . " manouvres to shoot at our ship!<br>";
-                $fleet[$x]->Move();
-                echo "The enemy ship " . $x + 1 . " reports " . $fleet[$x]->getFuel() . " fuel left.<br>";
-
-                echo "The enemy ship " . $x + 1 . " shoots at our ship! <br>";
-                $dmg = $fleet[$x]->Shoot();
-                echo "Ship " . $i + 1 . " does " . $dmg . " damage.<br>";
-                $fleet[$x]->hit($dmg);
-                echo "our ship has {$fleet[$i]->getHitPoints()} HP left.<br>";
-                echo "<br>";
-                if (!$fleet[$i]->isAlive()) {
-                    echo "oh no! one of our ships died!!";
-                }
-            }
-        } while ($enemyFleet[$x]->isAlive() | $fleet[$i]->isAlive());
-
-
         for ($i = 0; $i < $numberOfShips; $i++) {
             // Ook hier moet de code worden verbeterd zodat het weer werkt.
             echo "Ship " . $i + 1 . " shoots at the enemy! <br>";
@@ -146,7 +87,7 @@ include_once "space\Cargoship.php";
                 if (!$enemyFleet[$x]->isAlive()) {
                     echo "The enemy ship has been destroyed!!<br>";
                     break;
-                }
+               }
             }
         } while ($enemyFleet->isAlive() | $fleet->isAlive());
 
