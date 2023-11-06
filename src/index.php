@@ -1,9 +1,7 @@
 <?php
 use space\Spaceshipp;
-
-include_once "space\Spaceship.php";
 include_once "space\Fighter.php";
-include_once "space\Cargoship.php";
+include_once "space\Spaceship.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +28,6 @@ include_once "space\Cargoship.php";
 
         // Door nu de functie aan te roepen krijgen we de waarde alsnog.
         echo "The ship has " . $ship->GetAmmo() . " ammo.<br><br>";
-
 
         $fleet = array(Spaceshipp::class);
         // Ter voorkoming van Magic Numbers
@@ -60,7 +57,9 @@ include_once "space\Cargoship.php";
         }
 
         echo "<br>";
+        $enemyShip = new Spaceshipp(100, 100, 100);
 
+        
         for ($i = 0; $i < $numberOfShips; $i++) {
             // Ook hier moet de code worden verbeterd zodat het weer werkt.
             echo "Ship " . $i + 1 . " shoots at the enemy! <br>";
@@ -84,12 +83,12 @@ include_once "space\Cargoship.php";
                 $enemyShip->hit($dmg);
                 echo "The enemy has {$enemyShip->getHitPoints()} HP left.<br>";
                 echo "<br>";
-                if (!$enemyFleet[$x]->isAlive()) {
+                if (!$enemyShip->isAlive()) {
                     echo "The enemy ship has been destroyed!!<br>";
                     break;
                }
             }
-        } while ($enemyFleet->isAlive() | $fleet->isAlive());
+        } while ($enemyShip->isAlive());
 
         echo "The end of the code has been reached.<br>";
         ?>
