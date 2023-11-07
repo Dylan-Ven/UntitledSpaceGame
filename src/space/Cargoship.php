@@ -1,11 +1,14 @@
 <?php
+
+namespace space;
+
 use space\Spaceshipp;
 // Met Fighter als voorbeeld is kunnen de studenten als oefening het cargoship zelf proberen te maken. Met de andere
 // classes en het design op papier als basis.
 
 include_once 'Spaceship.php';
 
-class Cargoship extends Spaceshipp
+class Cargoshipp extends Spaceshipp
 {
     private int $cargoSpace;
 

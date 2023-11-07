@@ -9,7 +9,7 @@ include_once 'space\Spaceship.php';
 // Private wordt doorgegeven. Bedenk ook dat overerving alleen naar beneden in de hierarchie wordt doorgegeven. Het
 // vergelijk is hier te maken met ouders en kinderen, DNA gaat van opa en oma, naar ouder, naar kind, niet terug.
 // Je zou ook kunnen stellen dat extends zegt wat het belooft te doen, uitbreiden van Spaceship in dit geval.
-class Fighter extends Spaceshipp
+class Fighterr extends Spaceshipp
 {
     // Fighter erft hier de rest van Spaceship en heeft alleen ammo nodig.
     private int $ammo;
