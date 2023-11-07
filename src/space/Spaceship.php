@@ -83,7 +83,7 @@ class Spaceshipp
         return $this->hitPoints;
     }
 
-    public function IsAlive(): bool
+    public function isAlive(): bool
     {
         return $this->isAlive;
     }

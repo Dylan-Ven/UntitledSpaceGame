@@ -38,14 +38,6 @@ include_once "space\Cargoship.php";
             $ammo = random_int($minAmmo, $maxAmmo);
             $fuel = random_int($minFuel, $maxAmmo);
             $hp = random_int($minHP, $maxHP);
-        //     if ($i % 3 == 0) {
-        //         $fleet[$i] = new space\Spaceshipp($fuel, $hp);
-        //     } elseif ($i % 3 == 1) {
-        //         $fleet[$i] = new space\Fighterr($fuel, $hp, $ammo);
-        //     } else {
-        //         $fleet[$i] = new space\Cargoshipp($fuel, $hp);
-        //     }
-        // }
         
         if (mt_rand() / mt_getrandmax() < 0.7) {
             $fleet[] = new space\Fighterr($ammo, $fuel, $hp);
@@ -78,18 +70,27 @@ include_once "space\Cargoship.php";
         }
 
         echo "<br>";
-        $enemyShip = new Spaceshipp(100, 100, 100);
 
+        $numberOfEnemyShips = 10; // Number of enemy ships
+        $enemyFleet = $fleet; // Initialize the enemy fleet array
         
-        // for ($i = 0; $i < $numberOfShips; $i++) {
-        //     // Ook hier moet de code worden verbeterd zodat het weer werkt.
-        //     echo "Ship " . $i + 1 . " shoots at the enemy! <br>";
-        //     $dmg = $fleet[$i]->Shoot();
-        //     echo "Ship " . $i + 1 . " does " . $dmg . " damage.<br>";
-        //     $enemyShip->hit($dmg);
-        //     echo "The enemy has " . $enemyShip->GetHitPoints() . " HP left.<br>";
-        //     echo "<br>";
-        // }
+        for ($x = 0; $x < $numberOfEnemyShips; $x++) {
+            // Generate random values for fuel, HP, and ammo (adjust as needed)
+            $fuel = random_int($minFuel, $maxFuel);
+            $hp = random_int($minHP, $maxHP);
+            $ammo = $maxAmmo;
+        
+            // Create enemy ships using the same classes as the original fleet
+            if (mt_rand() / mt_getrandmax() < 0.7) {
+                $enemyFleet[$x] = new space\Fighterr($ammo, $fuel, $hp);
+            } elseif ($cargoships < 2) {
+                $enemyFleet[$x] = new space\Cargoshipp($fuel, $hp);
+                $cargoships++;
+            } else {
+                $enemyFleet[$x] = new space\Spaceshipp($fuel, $hp);
+            }
+        }
+
         for ($i = 0; $i < $numberOfShips; $i++) {
             if ($i % 3 == 1) { // Check if the ship is a fighter (index 1 in the loop)
                 echo "Fighter Ship $i shoots at the enemy!<br>";
@@ -100,39 +101,43 @@ include_once "space\Cargoship.php";
                 echo "Ship " . $i . " is just a Cargoship, and therefore can not shoot <br>";
             }
         }
+        $battleInProgress = true;
 
-        // Voorbeeld uitwerking
-        do {
-            for ($i = 0; $i < $numberOfShips; $i++) {
-                echo "Ship " . ($i + 1) . " maneuvers to shoot at the enemy!<br>";
-            
-                if (is_object($fleet[$i])) {
-                    $fleet[$i]->Move();
-                    echo "Ship " . ($i + 1) . " reports " . $fleet[$i]->getFuel() . " fuel left.<br>";
-            
-                    if ($fleet[$i] instanceof Fighter) {
-                        echo "Fighter Ship " . ($i + 1) . " shoots at the enemy!<br>";
-                        $dmg = $fleet[$i]->Shoot();
-                        echo "Fighter Ship " . ($i + 1) . " does " . $dmg . " damage.<br>";
-                    }
-            
-                    $enemyShip->hit($dmg);
-                    echo "The enemy has {$enemyShip->getHitPoints()} HP left.<br>";
-                    echo "<br>";
-            
-                    if (!$enemyShip->isAlive()) {
-                        echo "The enemy ship has been destroyed!!<br>";
-                        break;
-                    }
-                } else {
-                    echo "Element $i in the fleet is not an object, skipping...<br>";
+        while ($battleInProgress) {
+            foreach ($fleet as $ship) {
+                // Original fleet ship actions (move, shoot, etc.)
+                $fleet[$i]->Move();
+                if ($fleet[$i] instanceof Fighter) {
+                    echo "Fighter Ship " . ($i + 1) . " shoots at the enemy!<br>";
+                    $dmg = $fleet[$i]->Shoot();
+                    echo "Fighter Ship " . ($i + 1) . " does " . $dmg . " damage.<br>";
                 }
+        
+                // Perform actions and update battle status
             }
-        } while ($enemyShip->isAlive());
+        
+            foreach ($enemyFleet as $enemyShip) {
+                // Enemy fleet ship actions (move, shoot, etc.)
+                $enemyFleet[$x]->Move();
+                if ($enemyFleet[$x] instanceof Fighter) {
+                    echo "Fighter Ship " . ($i + 1) . " shoots at the enemy!<br>";
+                    $dmg = $EnemyFleet[$x]->Shoot();
+                    echo "Fighter Ship " . ($i + 1) . " does " . $dmg . " damage.<br>";
+                }
+        
+                // Perform actions and update battle status
+            }
+        
+            // Check if the battle has concluded (e.g., all ships destroyed or certain conditions met)
+            if ($battleConcluded) {
+                $battleInProgress = false;
+            }
+        }
+
         echo "The end of the code has been reached.<br>";
         ?>
 
 
 </body>
 
-</html>\
+</html>
